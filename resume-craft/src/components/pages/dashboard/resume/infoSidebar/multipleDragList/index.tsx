@@ -1,4 +1,5 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
   DragDropContext,
@@ -44,10 +45,18 @@ export const MultipleDragList = ({
   };
 
   console.log({ fields });
+
+  const isEmpty = fields.length === 0;
   return (
     <div>
       <SectionTitle icon={data.icon} title={data.title} />
+
       <div className="mt-4 flex flex-col">
+        {isEmpty && (
+          <Button className="w-full gap-2" variant="outline" onClick={onAdd}>
+            Adicionar Item
+          </Button>
+        )}
         {!!fields.length && (
           <DragDropContext onDragEnd={handleDrag}>
             <Droppable droppableId={`droppable-${data.formKey}`}>
