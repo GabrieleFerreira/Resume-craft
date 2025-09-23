@@ -1,21 +1,21 @@
-import { ComponentProps } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { Input } from ".";
+import { Editor } from ".";
 import { FieldWrapper } from "../FieldWrapper";
 
-type InputFieldProps = ComponentProps<typeof Input> & {
+type EditorFieldProps = {
   label: string;
   name: string;
   containerClassName?: string;
+  required?: boolean;
 };
-export const InputField = ({
+export const EdidorField = ({
   label,
   name,
   containerClassName,
   required,
 
   ...props
-}: InputFieldProps) => {
+}: EditorFieldProps) => {
   const { control } = useFormContext();
   return (
     <Controller
@@ -30,10 +30,7 @@ export const InputField = ({
           className={containerClassName}
           error={fieldState.error}
         >
-          <Input {...props} {...field} />
-          {fieldState.error && (
-            <p className="text-sm text-red-500">{fieldState.error.message}</p>
-          )}
+          <Editor {...props} {...field} />
         </FieldWrapper>
       )}
     />

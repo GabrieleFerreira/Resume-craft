@@ -1,21 +1,22 @@
 import { ComponentProps } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { Input } from ".";
+import { IconInput } from ".";
 import { FieldWrapper } from "../FieldWrapper";
+import { Input } from "../input";
 
-type InputFieldProps = ComponentProps<typeof Input> & {
+type IconFieldProps = ComponentProps<typeof Input> & {
   label: string;
   name: string;
   containerClassName?: string;
 };
-export const InputField = ({
+export const IconField = ({
   label,
   name,
   containerClassName,
   required,
 
   ...props
-}: InputFieldProps) => {
+}: IconFieldProps) => {
   const { control } = useFormContext();
   return (
     <Controller
@@ -30,10 +31,7 @@ export const InputField = ({
           className={containerClassName}
           error={fieldState.error}
         >
-          <Input {...props} {...field} />
-          {fieldState.error && (
-            <p className="text-sm text-red-500">{fieldState.error.message}</p>
-          )}
+          <IconInput {...props} {...field} />
         </FieldWrapper>
       )}
     />

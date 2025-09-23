@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Fragment, useState } from "react";
 import { MultipleDragItemData, MultipleDragList } from "../multipleDragList";
+import { ManageMultipleItemDialog } from "../multipleDragList/Manage-multiplo-item-dialog";
 
 export const MultiplesSections = () => {
   const [sectionToAdd, setSectionToAdd] = useState<MultipleDragItemData | null>(
@@ -79,6 +80,16 @@ export const MultiplesSections = () => {
           />
         </Fragment>
       ))}
+
+      {sectionToAdd && (
+        <ManageMultipleItemDialog
+          data={sectionToAdd}
+          open={!!sectionToAdd}
+          setOpen={(value) => {
+            if (!value) setSectionToAdd(null);
+          }}
+        />
+      )}
     </div>
   );
 };

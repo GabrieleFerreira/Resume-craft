@@ -40,17 +40,27 @@ export const ResumePage = () => {
     <FormProvider {...methods}>
       <main className=" w-full h-screen overflow-hidden">
         <ResizablePanelGroup direction="horizontal" className="w-full h-full  ">
-          <ResizablePanel minSize={20} maxSize={40} defaultSize={40}>
+          <ResizablePanel
+            minSize={20}
+            maxSize={40}
+            defaultSize={40}
+            className="bg-yellow-300"
+          >
             <InfoSidebar />
           </ResizablePanel>
           <ResizableHandle withHandle />
 
-          <ResizablePanel>
+          <ResizablePanel className="bg-green-400">
             <ResumeContent />
           </ResizablePanel>
           <ResizableHandle withHandle />
 
-          <ResizablePanel minSize={20} maxSize={35} defaultSize={25}>
+          <ResizablePanel
+            minSize={20}
+            maxSize={35}
+            defaultSize={25}
+            className="bg-red-400"
+          >
             <StructureSidebar />
           </ResizablePanel>
         </ResizablePanelGroup>
