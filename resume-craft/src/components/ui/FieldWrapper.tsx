@@ -9,10 +9,11 @@ type FieldWrapperProps = {
   className?: string;
   error?: FieldError;
 };
+
 export const FieldWrapper = ({
-  children,
   label,
   className,
+  children,
   error,
 }: FieldWrapperProps) => {
   return (

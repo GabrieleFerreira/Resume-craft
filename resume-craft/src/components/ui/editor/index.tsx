@@ -1,44 +1,45 @@
-"use client";
-import { cn } from "@/lib/utils";
+"use client"
+
+import { cn } from '@/lib/utils';
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
-import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import { MenuBar } from "./MenuBar";
+import { EditorContent, useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import { useEffect } from 'react';
+import { MenuBar } from './MenuBar';
+
 type EditorProps = {
   value: string;
   onChange?: (value: string) => void;
   className?: string;
-};
+}
 
-export const Editor = ({ value, className, onChange }: EditorProps) => {
+export const Editor = ({ value, onChange, className }: EditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
         bulletList: {
           HTMLAttributes: {
-            class: "List-disc pl-4",
-          },
+            class: "list-disc pl-4"
+          }
         },
         orderedList: {
           HTMLAttributes: {
-            class: "List-decimal pl-4",
-          },
-        },
+            class: "list-decimal pl-4"
+          }
+        }
       }),
       Underline,
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
     ],
-
     content: value,
     editorProps: {
       attributes: {
-        class: "focus:outline-none h-full p-4",
-      },
+        class: "focus:outline-none h-full p-4"
+      }
     },
-
     onCreate({ editor }) {
       onChange?.(editor.getHTML());
     },
@@ -47,17 +48,26 @@ export const Editor = ({ value, className, onChange }: EditorProps) => {
     },
     autofocus: false,
   });
+
+  useEffect(() => {
+    const editorHTML = editor?.getHTML();
+
+    if (editorHTML !== value) {
+      setTimeout(() => {
+        editor?.commands.setContent(value);
+      }, 0);
+    }
+  }, [value])
+
   return (
-    <div
-      className={cn(
-        "bg-background border border-muted rounded-2xl flex flex-col",
-        className
-      )}
-    >
+    <div className={cn(
+      "bg-background border border-muted rounded-2xl w-full flex flex-col",
+      className
+    )}>
       <MenuBar editor={editor} />
-      <div className=" h-full [&>div]:h-full flex flex-col overflow-y-auto ">
+      <div className="h-full [&>div]:h-full flex flex-col overflow-y-auto">
         <EditorContent editor={editor} />
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,4 +1,5 @@
 "use client";
+
 import { Editor } from "@tiptap/react";
 import {
   AlignCenter,
@@ -18,8 +19,10 @@ import { Tooltip } from "../tooltip";
 type MenuBarProps = {
   editor: Editor | null;
 };
+
 export const MenuBar = ({ editor }: MenuBarProps) => {
   if (!editor) return null;
+
   const ACTIONS = [
     {
       label: "Negrito",
@@ -84,20 +87,16 @@ export const MenuBar = ({ editor }: MenuBarProps) => {
   ];
 
   return (
-    <div
-      className="flex items-center border-b p-2
-         flex-wrap"
-    >
+    <div className="flex items-center border-b p-2 flex-wrap">
       {ACTIONS.map((action) => (
-        <Tooltip content={action.label} key={action.label}>
+        <Tooltip key={action.label} content={action.label}>
           <Button
-            key={action.label}
             onClick={action.action}
-            variant={"ghost"}
-            className="p-2 h-max "
+            variant="ghost"
+            className="p-2 h-max"
             type="button"
           >
-            <action.icon className=" size-4" />
+            <action.icon className="w-4 h-4" />
           </Button>
         </Tooltip>
       ))}

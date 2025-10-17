@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@/components/shared/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Nunito, Nunito_Sans } from "next/font/google";
@@ -32,6 +33,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+
+                 <Toaster/> 
+          
         </ThemeProvider>
       </body>
     </html>

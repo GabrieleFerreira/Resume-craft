@@ -1,28 +1,25 @@
-import { useDebouce } from "@/hooks/UseDebouce";
+import { useDebounce } from "@/hooks/UseDebouce";
 import { Input } from "../input";
 
-type IconInput = {
+type IconInputProps = {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
-};
-export const IconInput = ({ onChange, value, placeholder }: IconInput) => {
-  const debouceValue = useDebouce(1000);
+}
+
+export const IconInput = ({ value, onChange, placeholder }: IconInputProps) => {
+  const debouncedValue = useDebounce(value);
+
   return (
-    <div className=" flex items-center gap-2">
+    <div className="flex items-center gap-2">
       <div className="w-8 h-8 min-w-8 rounded-full bg-white p-1.5">
-        {!!debouceValue && (
-          <img
-            src={`https://cdn.simplesicon.org/${value}`}
-            className="w-full h-full object-contain"
-          />
-        )}
+        {!!debouncedValue && <img src={`https://cdn.simpleicons.org/${debouncedValue}`} className="w-full h-full object-contain" />}
       </div>
       <Input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
       />
-    </div>
-  );
-};
+    </div> 
+  )
+}

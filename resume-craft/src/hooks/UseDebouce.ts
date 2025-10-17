@@ -1,13 +1,34 @@
+"use client";
 import { useEffect, useState } from "react";
-import { clearTimeout } from "timers";
 
-export const useDebouce = <T>(value: T, delay?: number): T => {
-  const [debouce, setDebouce] = useState<T>(value);
+export const useDebounce = <T>(value: T, delay?: number): T => {
+  const [debounced, setDebounced] = useState<T>(value);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouce(value), delay || 500);
+    const timer = setTimeout(() => setDebounced(value), delay || 500);
     return () => clearTimeout(timer);
-  }, [delay, value]);
+  }, [value, delay]);
 
-  return debouce;
+  return debounced;
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 };
