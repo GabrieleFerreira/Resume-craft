@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BaseDialogProps, Dialog } from "@/components/ui/dialog";
 
+import { EditorField } from "@/components/ui/editor/Field";
 import { IconField } from "@/components/ui/iconInput/Field";
 import { InputField } from "@/components/ui/input/Field";
 import { SliderField } from "@/components/ui/slider/Field";
@@ -257,7 +258,7 @@ export const ManageMultipleItemDialog = ({
       const isFullWidth = !!field?.fullWidth;
 
       const inputProps = {
-        name: field.key,
+        name: String(field.key),
         label: field.label,
         containerClassName: cn(isFullWidth && "col-span-full"),
         required: field.required,
