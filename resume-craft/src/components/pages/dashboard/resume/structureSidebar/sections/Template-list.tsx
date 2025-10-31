@@ -25,7 +25,7 @@ export const TemplatesListSection = () => {
                   type="button"
                   className={
                     (cn(
-                      "relative rounded border-2  w-full aspect-auto border-muted overflow-hidden hover:brightness-125 transition-all"
+                      "w-full aspect-auto relative rounded border-2  border-muted overflow-hidden hover:brightness-125 transition-all"
                     ),
                     isSelected && "border-muted-foreground")
                   }
@@ -40,10 +40,9 @@ export const TemplatesListSection = () => {
                   />
 
                   <div
-                    className={cn(
-                      "absolute text-sm inset-0 w-full h-full flex flex-col font-bold font-title capitalize",
-                      "items-center justify-end p-2 bg-gradient-to-t from-background"
-                    )}
+                    className={
+                      "absolute text-sm inset-0 w-full h-full flex flex-col font-bold font-title capitalize items-center justify-end p-2 bg-gradient-to-t from-background"
+                    }
                   >
                     {template}
                   </div>
