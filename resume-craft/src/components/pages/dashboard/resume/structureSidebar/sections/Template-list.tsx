@@ -11,38 +11,39 @@ export const TemplatesListSection = () => {
 
   return (
     <div>
-      <SectionTitle title={"Modelos"} icon={LayoutTemplate} />
+      <SectionTitle title="Modelos" icon={LayoutTemplate} />
+
       <Controller
         control={control}
         name="structure.template"
         render={({ field }) => (
           <div className="w-full grid grid-cols-2 gap-4 mt-4">
             {allTemplates.map((template) => {
-              const isSelected = (field.value = template);
+              const isSelected = field.value === template;
+
               return (
                 <button
                   key={`template-${template}`}
                   type="button"
-                  className={
-                    (cn(
-                      "w-full aspect-auto relative rounded border-2  border-muted overflow-hidden hover:brightness-125 transition-all"
-                    ),
-                    isSelected && "border-muted-foreground")
-                  }
+                  className={cn(
+                    "w-full aspect-auto relative rounded border-2 border-muted overflow-hidden hover:brightness-125 transition-all",
+                    isSelected && "border-muted-foreground"
+                  )}
                   onClick={() => field.onChange(template)}
                 >
                   <Image
                     className="w-full h-full object-cover"
-                    alt={template}
                     width={150}
                     height={130}
                     src={`/images/template/${template}.webp`}
+                    alt={template}
                   />
 
                   <div
-                    className={
-                      "absolute text-sm inset-0 w-full h-full flex flex-col font-bold font-title capitalize items-center justify-end p-2 bg-gradient-to-t from-background"
-                    }
+                    className={cn(
+                      "absolute text-sm inset-0 w-full h-full flex flex-col font-bold font-title capitalize",
+                      "items-center justify-end p-2 bg-gradient-to-t from-background"
+                    )}
                   >
                     {template}
                   </div>

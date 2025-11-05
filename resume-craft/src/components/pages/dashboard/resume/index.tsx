@@ -38,26 +38,23 @@ export const ResumePage = () => {
       colorTheme: "slate",
       language: "portuguese",
       layout: {
-         mainSections: [
-           {key: "socialMedias"},
-           {key: "summary"},
-           { key: "experiences"},
-           { key: "educations"},
-           { key: "certifications"},
-            {key: "projects" },
-          ],
-         sidebarSections: [
-          {key:"languages" },
-          {key: "skills"}
-         ]
-      }
-    }
+        mainSections: [
+          { key: "socialMedias" },
+          { key: "summary" },
+          { key: "experiences" },
+          { key: "educations" },
+          { key: "certifications" },
+          { key: "projects" },
+        ],
+        sidebarSections: [{ key: "languages" }, { key: "skills" }],
+      },
+    },
   };
   const methods = useForm<ResumeData>({ defaultValues });
 
   return (
     <FormProvider {...methods}>
-      <main className=" w-full h-screen overflow-hidden">
+      <main className="w-full h-screen overflow-hidden">
         <ResizablePanelGroup direction="horizontal" className="w-full h-full  ">
           <ResizablePanel minSize={20} maxSize={40} defaultSize={40}>
             <InfoSidebar />

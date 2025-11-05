@@ -1,4 +1,4 @@
-import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
+import { DragDropContext, DropResult, Droppable } from "@hello-pangea/dnd";
 import { Columns3 } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { SectionTitle } from "../../infoSidebar/SectionTitle";
@@ -6,10 +6,11 @@ import { LayoutDragList } from "../LayoutDragList";
 
 export const LayoutSection = () => {
   const { control } = useFormContext<ResumeData>();
+
   const {
     fields: mainFields,
     move: moveMainField,
-    insert: inserteMainField,
+    insert: insertMainField,
     remove: removeMainField,
   } = useFieldArray({
     control,
@@ -19,25 +20,29 @@ export const LayoutSection = () => {
   const {
     fields: sidebarFields,
     move: moveSidebarField,
-    insert: inserteSidebarField,
+    insert: insertSidebarField,
     remove: removeSidebarField,
   } = useFieldArray({
     control,
     name: "structure.layout.sidebarSections",
   });
+
   const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
-    if (source.droppableId === destination.droppableId) {
+
+    if (source.droppableId !== destination.droppableId) {
       switch (destination.droppableId) {
         case "mainFields":
-          inserteMainField(destination.index, sidebarFields[source.index]);
+          insertMainField(destination.index, sidebarFields[source.index]);
           removeSidebarField(source.index);
           break;
         case "sidebarFields":
-          inserteSidebarField(destination.index, mainFields[source.index]);
-          removeSidebarField(source.index);
+          insertSidebarField(destination.index, mainFields[source.index]);
+          removeMainField(source.index);
           break;
       }
+
+      return;
     }
 
     if (source.droppableId === "mainFields") {
@@ -45,11 +50,12 @@ export const LayoutSection = () => {
     } else {
       moveSidebarField(source.index, destination.index);
     }
-    console.log(source, destination);
   };
+
   return (
     <div>
       <SectionTitle title="Estrutura" icon={Columns3} />
+
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-2 gap-4 mt-4">
           <Droppable droppableId="mainFields">
@@ -60,7 +66,8 @@ export const LayoutSection = () => {
               </div>
             )}
           </Droppable>
-          <Droppable droppableId="mainFields">
+
+          <Droppable droppableId="sidebarFields">
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 <LayoutDragList title="Barra Lateral" fields={sidebarFields} />
