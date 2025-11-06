@@ -1,9 +1,15 @@
 "use client";
+import { useFormContext } from "react-hook-form";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { TransformControls } from "./Controls";
 import { NavigationHeader } from "./NavigationHeader";
-import { Resumetemplate } from "./templates";
+import { ResumeTemplate } from "./templates";
+
 export const ResumeContent = () => {
+
+    const { watch } = useFormContext<ResumeData>();
+
+  const data = watch();
   return (
     <section className="overflow-hidden w-full h-full flex items-center justify-center relative bg-muted dark:bg-background ">
       <TransformWrapper
@@ -17,7 +23,7 @@ export const ResumeContent = () => {
           <TransformControls />
           <NavigationHeader />
           <TransformComponent>
-            <Resumetemplate />
+            <ResumeTemplate data={data}/>
           </TransformComponent>
         </>
       </TransformWrapper>
