@@ -25,7 +25,7 @@ export const ThemeSection = () => {
 
   const currentColorTheme = watch("structure.colorTheme");
 
-  const handleSetCssVariable = useCallback(() => {
+    const handleSetCssVariable = useCallback(() => {
     if (!currentColorTheme) return;
 
     const colorKey = currentColorTheme as keyof typeof colors;
